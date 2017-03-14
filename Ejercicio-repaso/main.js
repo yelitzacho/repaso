@@ -23,10 +23,27 @@ nuevo objeto que esté almecenado en un array
 */
 
 window.addEventListener ('load',function(){
-  var ingresoButton = documernt.getElementById('ingreso');
+  var ingresoButton = document.getElementById('ingreso');
 
-  ingresoButton.addEventListener('click',function(){
-    var paciente = []; // Variable en donde se guardaran los datos ingresados
+  function PacientesLab(nombre,apellido,edad,genero,ciudad,pais){
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.edad = edad;
+    this.genero = genero;
+    this.ciudad = ciudad;
+    this.pais = pais;
+    this.enfermo= function (){
+      return ("<br>Nombre: " + this.nombre + this.apellido +
+              "<br>Edad: " + this.edad +
+              "<br>País: " + this.pais);
+    }
+  }
+
+  var paciente = []; // Variable en donde se guardaran los datos ingresados
+
+  ingresoButton.addEventListener('click',function(evento){
+    evento.preventDefault()
+
     var nombre = document.getElementById('nombre').value;
     var apellido = document.getElementById('apellido').value;
     var edad = document.getElementById('edad').value;
@@ -34,30 +51,9 @@ window.addEventListener ('load',function(){
     var ciudad = document.getElementById('ciudad').value;
     var pais = document.getElementById('pais').value;
     var registro = document.getElementById('registro');
-
-    function PacientesLab(nombre,apellido,edad,genero,ciudad,pais){
-      this.nombre = nombre;
-      this.apellido = apellido;
-      this.edad = edad;
-      this.genero = genero;
-      this.ciudad = ciudad;
-      this.pais = pais;
-    }
-
-
-
-
-
-
-
-    }
-
-
-
-
-
-
-
+    var ingreso = new  PacientesLab(nombre, apellido, edad, genero, ciudad, pais);
+    paciente.push(ingreso); //
+    registro.innerHTML= paciente[paciente.length -1].enfermo(); //
 
   });
 });
