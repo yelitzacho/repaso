@@ -40,20 +40,48 @@ window.addEventListener ('load',function(){
   }
 
   var paciente = []; // Variable en donde se guardaran los datos ingresados
+  var nombre = document.getElementById('nombre');
+  var apellido = document.getElementById('apellido');
+  var edad = document.getElementById('edad');
+  var genero = document.getElementById('genero');
+  var ciudad = document.getElementById('ciudad');
+  var pais = document.getElementById('pais');
+  var registro = document.getElementById('registro');
 
   ingresoButton.addEventListener('click',function(evento){
     evento.preventDefault()
 
-    var nombre = document.getElementById('nombre').value;
-    var apellido = document.getElementById('apellido').value;
-    var edad = document.getElementById('edad').value;
-    var genero = document.getElementById('genero').value;
-    var ciudad = document.getElementById('ciudad').value;
-    var pais = document.getElementById('pais').value;
-    var registro = document.getElementById('registro');
-    var ingreso = new  PacientesLab(nombre, apellido, edad, genero, ciudad, pais);
-    paciente.push(ingreso); //
-    registro.innerHTML= paciente[paciente.length -1].enfermo(); //
+    var ingreso = new  PacientesLab(nombre.value, apellido.value, edad.value, genero.value, ciudad.value, pais.value);
+    paciente.push(ingreso);
+    console.log (ingreso);
+    registro.innerHTML += paciente[paciente.length -1].enfermo();
 
   });
+
+  var Letras = function (evento){
+    var name = evento.keyCode;
+    console.log (name);
+    if ((name >= 65  && name <= 90) || (name >= 97 && name <= 122) || name == 32 ){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  var Numeros = function(evento){
+    var age = evento.keyCode;
+    if(age >= 48 && age <=57){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  nombre.onkeypress = Letras;
+  apellido.onkeypress = Letras;
+  edad.onkeypress = Numeros;
+  genero.onkeypress = Letras;
+  ciudad.onkeypress = Letras;
+  pais.onkeypress = Letras;
+
 });
